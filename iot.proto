@@ -31,7 +31,7 @@ message SensorStatus{
 
 service IotSender {
     // From the perspective of the server.
-    rpc GetSensorData (SensorData) returns(Reply) {}
+    rpc GetSensorData (stream SensorData) returns(Reply) {}
     rpc SendSensorStatus (SensorId) returns(SensorStatus) {}
 }
 

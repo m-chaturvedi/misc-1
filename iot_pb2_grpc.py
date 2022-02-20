@@ -14,7 +14,7 @@ class IotSenderStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.GetSensorData = channel.unary_unary(
+        self.GetSensorData = channel.stream_unary(
                 '/IotSender/GetSensorData',
                 request_serializer=iot__pb2.SensorData.SerializeToString,
                 response_deserializer=iot__pb2.Reply.FromString,
@@ -29,7 +29,7 @@ class IotSenderStub(object):
 class IotSenderServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def GetSensorData(self, request, context):
+    def GetSensorData(self, request_iterator, context):
         """From the perspective of the server.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -45,7 +45,7 @@ class IotSenderServicer(object):
 
 def add_IotSenderServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'GetSensorData': grpc.unary_unary_rpc_method_handler(
+            'GetSensorData': grpc.stream_unary_rpc_method_handler(
                     servicer.GetSensorData,
                     request_deserializer=iot__pb2.SensorData.FromString,
                     response_serializer=iot__pb2.Reply.SerializeToString,
@@ -66,7 +66,7 @@ class IotSender(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def GetSensorData(request,
+    def GetSensorData(request_iterator,
             target,
             options=(),
             channel_credentials=None,
@@ -76,7 +76,7 @@ class IotSender(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/IotSender/GetSensorData',
+        return grpc.experimental.stream_unary(request_iterator, target, '/IotSender/GetSensorData',
             iot__pb2.SensorData.SerializeToString,
             iot__pb2.Reply.FromString,
             options, channel_credentials,

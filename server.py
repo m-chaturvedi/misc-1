@@ -23,18 +23,21 @@ class Service(iot_pb2_grpc.IotSenderServicer):
         return 2
       return 0
 
-    def GetSensorData(self, request, _):
-      # Unfortunately sqlite3 doesn't send error codes.
-      str_list = [request.deviceId, request.timestamp, request.pressure, request.status, request.temperature]
-      logging.info("Received: %s", str(str_list))
-
+    def GetSensorData(self, request_iterator, _):
+      ret = 0
       sql_db = storage.SqlStorage()
-      sql_db.append_to_table(deviceId=request.deviceId, timestamp=request.timestamp,
-        pressure=request.pressure, status=request.status, temperature=request.temperature)
+      for request in request_iterator:
+        # Unfortunately sqlite3 doesn't send error codes.
+        str_list = [request.deviceId, request.timestamp, request.pressure, request.status, request.temperature]
+        logging.info("Received: %s", str(str_list))
+
+        sql_db.append_to_table(deviceId=request.deviceId, timestamp=request.timestamp,
+          pressure=request.pressure, status=request.status, temperature=request.temperature)
+        logging.info("Date received: %s" % datetime.utcfromtimestamp(request.timestamp))
+        ret = max(ret, self.check(request))
       sql_db.cursor.close()
       sql_db.connection.close()
-      logging.info("Date received: %s" % datetime.utcfromtimestamp(request.timestamp))
-      return iot_pb2.Reply(returnValue = self.check(request))
+      return iot_pb2.Reply(returnValue=ret)
 
     def SendSensorStatus(self, request, _):
       sql_db = storage.SqlStorage()

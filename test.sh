@@ -11,4 +11,5 @@ rm -f canvass.db
 python3 server.py &
 PID=$!
 sleep 3
-python3 -m pytest -s
+python3 -m pytest --pdb -s
+python3 simulator.py

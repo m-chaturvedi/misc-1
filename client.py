@@ -45,12 +45,16 @@ class IotAPI:
     }
     return protobuf_struct
 
-  def send_sensor_json(self, json_struct):
-    protobuf_struct = self.parse_io_json(json_struct)
+  def generate_structs(self, json_structs):
+    for json_struct in json_structs:
+      protobuf_struct = self.parse_io_json(json_struct)
+      yield iot_pb2.SensorData(**protobuf_struct)
+
+  def send_sensor_json(self, json_structs):
     with grpc.insecure_channel("{}:{}".format(Config.hostname, Config.port)) as channel:
+      struct_iterator = self.generate_structs(json_structs)
       stub = iot_pb2_grpc.IotSenderStub(channel)
-      data = iot_pb2.SensorData(**protobuf_struct)
-      response = stub.GetSensorData(data)
+      response = stub.GetSensorData(struct_iterator)
     return response.returnValue
 
   def get_sensor_histogram(self, sensor_id):

@@ -1,9 +1,8 @@
 import datetime
-import traceback
+
 from grpc import RpcError
 from client import IotAPI
 import random
-from time import sleep
 import pytest
 import logging
 logging.basicConfig(level='INFO')
@@ -17,7 +16,7 @@ def send_data(sensor_num, status):
     "timestamp": datetime.datetime.now().strftime(date_format), "status": status, "pressure": R(1, 1000),
     "temperature": R(-100, 100)}
   print(f"Sending: {json_dict}")
-  response = s.send_sensor_json(json_dict)
+  response = s.send_sensor_json([json_dict])
   return response
 
 def receive_status(sensor_id):
@@ -44,23 +43,23 @@ def test_api():
   assert receive_status("6") == [0, 0, 0, 0] # Absent
 
   s = IotAPI()
-  with pytest.raises(ValueError, match="JSON keys don't match the requirements"):
-    s.send_sensor_json({})
+  with pytest.raises(RpcError):
+    s.send_sensor_json([{}])
 
-  with pytest.raises(ValueError, match="JSON keys don't match the requirements"):
-    s.send_sensor_json({"random": 3})
-  
-  with pytest.raises(ValueError, match="'status' key incorrectly formatted"):
+  with pytest.raises(RpcError):
+    s.send_sensor_json([{"random": 3}])
+
+  with pytest.raises(RpcError):
     json_dict = {"deviceId": "1",
       "timestamp": datetime.datetime.now().strftime(date_format),
       "status": "RANDOM", "pressure": R(1, 1000), "temperature": R(-100, 100)}
-    s.send_sensor_json(json_dict)
+    s.send_sensor_json([json_dict])
 
-  with pytest.raises(ValueError, match="Value out of range:"):
+  with pytest.raises(RpcError) as e:
     json_dict = {"deviceId": "1",
       "timestamp": datetime.datetime.now().strftime(date_format),
       "status": "INACTIVE", "pressure": R(1, 1000), "temperature": 1e20}
-    s.send_sensor_json(json_dict)
+    s.send_sensor_json([json_dict])
 
   assert receive_status("1") == [4, 3, 2, 1]
   assert receive_status("2") == [1, 0, 0, 0]
