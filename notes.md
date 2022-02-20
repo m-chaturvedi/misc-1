@@ -1,4 +1,5 @@
 ### Limitations and observations
+- `server.py` doesn't shut down gracefully.
 - gRPC Security: Provides auth via TLS.  Not tested.
 - Written in C++ with bindings in all major languages.
 - Provides async, so no need to wait on network failure.
