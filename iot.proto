@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+// From requirements: Every sensor will always send a 'deviceId' and 'timestamp'.
+
+message SensorData {
+    string deviceId = 1; // Field numbers used to id in binary data.
+    uint64 timestamp = 2; // Converting to int64 to save data transfer.
+    float pressure = 3;
+    enum Status {
+        DEFAULT = 0; // DEFAULT value must be first define enum which is eq 0
+        ON = 1;
+        OFF = 2;
+        ACTIVE = 3;
+        INACTIVE = 4;
+    }
+    Status status = 4;
+    int32 temperature = 5; // Assumed as an int from the pdf, may be a float? Not necessarily in Kelvin.
+}
+
+message Reply {
+    int32 returnValue = 1;
+}
+
+message SensorId {
+    string deviceId = 1;
+}
+
+message SensorStatus{
+    repeated int32 status_freq = 1;
+}
+
+service IotSender {
+    // From the perspective of the server.
+    rpc GetSensorData (SensorData) returns(Reply) {}
+    rpc SendSensorStatus (SensorId) returns(SensorStatus) {}
+}
+
+
