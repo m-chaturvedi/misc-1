@@ -51,6 +51,15 @@ class Service(iot_pb2_grpc.IotSenderServicer):
       sql_db.connection.close()
       return iot_pb2.SensorStatus(status_freq=status_freq)
 
+    def SendSensorHistory(self, request, _):
+      sql_db = storage.SqlStorage()
+      status_freq = []
+      sql_object = sql_db.cursor.execute(f"SELECT status FROM {Config.table_name} "
+          "WHERE deviceId = '%s'" % (request.deviceId))
+      status_freq = [x[0] for x in sql_object.fetchall()]
+      sql_db.cursor.close()
+      sql_db.connection.close()
+      return iot_pb2.SensorStatus(status_freq=status_freq)
 
 # Handle exceptions
 async def run_server():

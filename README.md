@@ -24,7 +24,7 @@ The rpc requests sent to the server are put to sqlite database called `canvass.d
 ### Big picture
 
 We send json using the method `send_sensor_json` in the `IotAPI` class in `client.py`.
-We get info about the statuses using `get_sensor_historgram` from `IotAPI` class.
+We get info about the statuses using `get_sensor_historgram` and `get_sensor_history` from `IotAPI` class.
 
 I assume when you say "histogram of the status for each given device id" to be the int array which
 gives the total number of "OFF", "ON", "ACTIVE", "INACTIVE" status from which a histogram can be drawn.
@@ -42,4 +42,4 @@ The JSON is of format:
   "temperature": int
 }
 ```
-  
+

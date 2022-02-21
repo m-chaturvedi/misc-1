@@ -64,4 +64,15 @@ class IotAPI:
       response = stub.SendSensorStatus(data)
     return response.status_freq
 
+  def get_sensor_history(self, sensor_id):
+    with grpc.insecure_channel("{}:{}".format(Config.hostname, Config.port)) as channel:
+      stub = iot_pb2_grpc.IotSenderStub(channel)
+      data = iot_pb2.SensorId(deviceId=sensor_id)
+      response = stub.SendSensorHistory(data)
+    keys = list(Config.status_dict.keys())
+    ret = [keys[x - 1] for x in response.statuses]
+    return ret
+
+
+
 

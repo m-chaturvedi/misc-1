@@ -24,6 +24,11 @@ def receive_status(sensor_id):
   response = s.get_sensor_histogram(sensor_id)
   return response
 
+def receive_history(sensor_id):
+  s = IotAPI()
+  response = s.get_sensor_history(sensor_id)
+  return response
+
 def test_api():
   for _ in range(4): assert send_data("1", "ON") == 0
   for _ in range(3): assert send_data("1", "OFF") == 0
@@ -41,6 +46,7 @@ def test_api():
   assert receive_status("4") == [0, 0, 1, 0]
   assert receive_status("5") == [0, 0, 0, 1]
   assert receive_status("6") == [0, 0, 0, 0] # Absent
+  assert receive_history("1") == ["ON"]* 4 + ["OFF"]*3 + ["ACTIVE"]*2 + ["INACTIVE"]
 
   s = IotAPI()
   with pytest.raises(RpcError):

@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\tiot.proto\"\xbe\x01\n\nSensorData\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x04\x12\x10\n\x08pressure\x18\x03 \x01(\x02\x12\"\n\x06status\x18\x04 \x01(\x0e\x32\x12.SensorData.Status\x12\x13\n\x0btemperature\x18\x05 \x01(\x05\"@\n\x06Status\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x06\n\x02ON\x10\x01\x12\x07\n\x03OFF\x10\x02\x12\n\n\x06\x41\x43TIVE\x10\x03\x12\x0c\n\x08INACTIVE\x10\x04\"\x1c\n\x05Reply\x12\x13\n\x0breturnValue\x18\x01 \x01(\x05\"\x1c\n\x08SensorId\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\"#\n\x0cSensorStatus\x12\x13\n\x0bstatus_freq\x18\x01 \x03(\x05\x32\x65\n\tIotSender\x12(\n\rGetSensorData\x12\x0b.SensorData\x1a\x06.Reply\"\x00(\x01\x12.\n\x10SendSensorStatus\x12\t.SensorId\x1a\r.SensorStatus\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\tiot.proto\"\xbe\x01\n\nSensorData\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x04\x12\x10\n\x08pressure\x18\x03 \x01(\x02\x12\"\n\x06status\x18\x04 \x01(\x0e\x32\x12.SensorData.Status\x12\x13\n\x0btemperature\x18\x05 \x01(\x05\"@\n\x06Status\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x06\n\x02ON\x10\x01\x12\x07\n\x03OFF\x10\x02\x12\n\n\x06\x41\x43TIVE\x10\x03\x12\x0c\n\x08INACTIVE\x10\x04\"\x1c\n\x05Reply\x12\x13\n\x0breturnValue\x18\x01 \x01(\x05\"\x1c\n\x08SensorId\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\"#\n\x0cSensorStatus\x12\x13\n\x0bstatus_freq\x18\x01 \x03(\x05\"!\n\rSensorHistory\x12\x10\n\x08statuses\x18\x01 \x03(\x05\x32\x97\x01\n\tIotSender\x12(\n\rGetSensorData\x12\x0b.SensorData\x1a\x06.Reply\"\x00(\x01\x12.\n\x10SendSensorStatus\x12\t.SensorId\x1a\r.SensorStatus\"\x00\x12\x30\n\x11SendSensorHistory\x12\t.SensorId\x1a\x0e.SensorHistory\"\x00\x62\x06proto3'
 )
 
 
@@ -221,12 +221,45 @@ _SENSORSTATUS = _descriptor.Descriptor(
   serialized_end=301,
 )
 
+
+_SENSORHISTORY = _descriptor.Descriptor(
+  name='SensorHistory',
+  full_name='SensorHistory',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='statuses', full_name='SensorHistory.statuses', index=0,
+      number=1, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=303,
+  serialized_end=336,
+)
+
 _SENSORDATA.fields_by_name['status'].enum_type = _SENSORDATA_STATUS
 _SENSORDATA_STATUS.containing_type = _SENSORDATA
 DESCRIPTOR.message_types_by_name['SensorData'] = _SENSORDATA
 DESCRIPTOR.message_types_by_name['Reply'] = _REPLY
 DESCRIPTOR.message_types_by_name['SensorId'] = _SENSORID
 DESCRIPTOR.message_types_by_name['SensorStatus'] = _SENSORSTATUS
+DESCRIPTOR.message_types_by_name['SensorHistory'] = _SENSORHISTORY
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 SensorData = _reflection.GeneratedProtocolMessageType('SensorData', (_message.Message,), {
@@ -257,6 +290,13 @@ SensorStatus = _reflection.GeneratedProtocolMessageType('SensorStatus', (_messag
   })
 _sym_db.RegisterMessage(SensorStatus)
 
+SensorHistory = _reflection.GeneratedProtocolMessageType('SensorHistory', (_message.Message,), {
+  'DESCRIPTOR' : _SENSORHISTORY,
+  '__module__' : 'iot_pb2'
+  # @@protoc_insertion_point(class_scope:SensorHistory)
+  })
+_sym_db.RegisterMessage(SensorHistory)
+
 
 
 _IOTSENDER = _descriptor.ServiceDescriptor(
@@ -266,8 +306,8 @@ _IOTSENDER = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=303,
-  serialized_end=404,
+  serialized_start=339,
+  serialized_end=490,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetSensorData',
@@ -286,6 +326,16 @@ _IOTSENDER = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_SENSORID,
     output_type=_SENSORSTATUS,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='SendSensorHistory',
+    full_name='IotSender.SendSensorHistory',
+    index=2,
+    containing_service=None,
+    input_type=_SENSORID,
+    output_type=_SENSORHISTORY,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
