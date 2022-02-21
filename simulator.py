@@ -16,7 +16,10 @@ class Simulator:
     self.interval_secs = interval_secs
     self.iot_server = IotAPI()
     self.sent_status = []
-    for _ in range(self.num_devices): self.sent_status.append([0, 0, 0, 0])
+    self.device_history = []
+    for _ in range(self.num_devices):
+      self.sent_status.append([0, 0, 0, 0])
+      self.device_history.append([])
 
   def create_json(self):
     json_dict_list = []
@@ -25,6 +28,7 @@ class Simulator:
       random_status_ind = R(0, 3)
       status = ["ON", "OFF", "ACTIVE", "INACTIVE"][random_status_ind]
       self.sent_status[num][random_status_ind] += 1
+      self.device_history[num].append(status)
 
       json_dict = {"deviceId": sensor_name, "timestamp": datetime.datetime.now().strftime(date_format),
           "status": status, "pressure": R(1, 1000), "temperature": R(-100, 100)}
@@ -37,6 +41,7 @@ class Simulator:
   def test_expected_status(self):
     for ind in range(self.num_devices):
       assert self.iot_server.get_sensor_histogram(f"sensor-{ind+1}") == self.sent_status[ind]
+      assert self.iot_server.get_sensor_history(f"sensor-{ind+1}") == self.device_history[ind]
 
   def run(self):
     while True:
