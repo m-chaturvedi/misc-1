@@ -33,11 +33,21 @@ message SensorHistory {
     repeated int32 statuses = 1;
 }
 
+message Field {
+    string field = 1;
+}
+
+message TopSensorId {
+    repeated string ids = 1;
+    repeated float field = 2;
+}
+
 service IotSender {
     // From the perspective of the server.
     rpc GetSensorData (stream SensorData) returns(Reply) {}
     rpc SendSensorStatus (SensorId) returns(SensorStatus) {}
     rpc SendSensorHistory (SensorId) returns(SensorHistory) {}
+    rpc SendTopSensorId (Field) returns(TopSensorId) {}
 }
 
 

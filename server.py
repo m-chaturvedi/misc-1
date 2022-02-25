@@ -61,6 +61,18 @@ class Service(iot_pb2_grpc.IotSenderServicer):
       sql_db.connection.close()
       return iot_pb2.SensorStatus(status_freq=status_freq)
 
+    def SendTopSensorId(self, request, _):
+      sql_db = storage.SqlStorage()
+      field = request.field
+      sql_object = sql_db.cursor.execute(f"SELECT deviceId,{field} FROM {Config.table_name} "
+          f"ORDER BY {field} DESC LIMIT 10")
+      sql_object_populated = sql_object.fetchall()
+      ids = [str(x[0]) for x in sql_object_populated]
+      values = [float(x[1]) for x in sql_object_populated]
+      return iot_pb2.TopSensorId(ids=ids, field=values)
+
+
+
 # Handle exceptions
 async def run_server():
     server = grpc.aio.server()

@@ -73,6 +73,16 @@ class IotAPI:
     ret = [keys[x - 1] for x in response.statuses]
     return ret
 
+  def get_top_sensor_ids(self, field):
+    with grpc.insecure_channel("{}:{}".format(Config.hostname, Config.port)) as channel:
+      stub = iot_pb2_grpc.IotSenderStub(channel)
+      data = iot_pb2.Field(field=field)
+      response = stub.SendTopSensorId(data)
+    sensor_ids = list(response.ids)
+    val = list(response.field)
+    return (sensor_ids, val)
+
+
 
 
 

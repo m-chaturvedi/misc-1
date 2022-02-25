@@ -3,6 +3,7 @@
 # source: iot.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
@@ -13,255 +14,18 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='iot.proto',
-  package='',
-  syntax='proto3',
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\tiot.proto\"\xbe\x01\n\nSensorData\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x04\x12\x10\n\x08pressure\x18\x03 \x01(\x02\x12\"\n\x06status\x18\x04 \x01(\x0e\x32\x12.SensorData.Status\x12\x13\n\x0btemperature\x18\x05 \x01(\x05\"@\n\x06Status\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x06\n\x02ON\x10\x01\x12\x07\n\x03OFF\x10\x02\x12\n\n\x06\x41\x43TIVE\x10\x03\x12\x0c\n\x08INACTIVE\x10\x04\"\x1c\n\x05Reply\x12\x13\n\x0breturnValue\x18\x01 \x01(\x05\"\x1c\n\x08SensorId\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\"#\n\x0cSensorStatus\x12\x13\n\x0bstatus_freq\x18\x01 \x03(\x05\"!\n\rSensorHistory\x12\x10\n\x08statuses\x18\x01 \x03(\x05\x32\x97\x01\n\tIotSender\x12(\n\rGetSensorData\x12\x0b.SensorData\x1a\x06.Reply\"\x00(\x01\x12.\n\x10SendSensorStatus\x12\t.SensorId\x1a\r.SensorStatus\"\x00\x12\x30\n\x11SendSensorHistory\x12\t.SensorId\x1a\x0e.SensorHistory\"\x00\x62\x06proto3'
-)
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\tiot.proto\"\xbe\x01\n\nSensorData\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x04\x12\x10\n\x08pressure\x18\x03 \x01(\x02\x12\"\n\x06status\x18\x04 \x01(\x0e\x32\x12.SensorData.Status\x12\x13\n\x0btemperature\x18\x05 \x01(\x05\"@\n\x06Status\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x06\n\x02ON\x10\x01\x12\x07\n\x03OFF\x10\x02\x12\n\n\x06\x41\x43TIVE\x10\x03\x12\x0c\n\x08INACTIVE\x10\x04\"\x1c\n\x05Reply\x12\x13\n\x0breturnValue\x18\x01 \x01(\x05\"\x1c\n\x08SensorId\x12\x10\n\x08\x64\x65viceId\x18\x01 \x01(\t\"#\n\x0cSensorStatus\x12\x13\n\x0bstatus_freq\x18\x01 \x03(\x05\"!\n\rSensorHistory\x12\x10\n\x08statuses\x18\x01 \x03(\x05\"\x16\n\x05\x46ield\x12\r\n\x05\x66ield\x18\x01 \x01(\t\")\n\x0bTopSensorId\x12\x0b\n\x03ids\x18\x01 \x03(\t\x12\r\n\x05\x66ield\x18\x02 \x03(\x02\x32\xc2\x01\n\tIotSender\x12(\n\rGetSensorData\x12\x0b.SensorData\x1a\x06.Reply\"\x00(\x01\x12.\n\x10SendSensorStatus\x12\t.SensorId\x1a\r.SensorStatus\"\x00\x12\x30\n\x11SendSensorHistory\x12\t.SensorId\x1a\x0e.SensorHistory\"\x00\x12)\n\x0fSendTopSensorId\x12\x06.Field\x1a\x0c.TopSensorId\"\x00\x62\x06proto3')
 
 
 
-_SENSORDATA_STATUS = _descriptor.EnumDescriptor(
-  name='Status',
-  full_name='SensorData.Status',
-  filename=None,
-  file=DESCRIPTOR,
-  create_key=_descriptor._internal_create_key,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='DEFAULT', index=0, number=0,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='ON', index=1, number=1,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='OFF', index=2, number=2,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='ACTIVE', index=3, number=3,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='INACTIVE', index=4, number=4,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=140,
-  serialized_end=204,
-)
-_sym_db.RegisterEnumDescriptor(_SENSORDATA_STATUS)
-
-
-_SENSORDATA = _descriptor.Descriptor(
-  name='SensorData',
-  full_name='SensorData',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='deviceId', full_name='SensorData.deviceId', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='timestamp', full_name='SensorData.timestamp', index=1,
-      number=2, type=4, cpp_type=4, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='pressure', full_name='SensorData.pressure', index=2,
-      number=3, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='status', full_name='SensorData.status', index=3,
-      number=4, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='temperature', full_name='SensorData.temperature', index=4,
-      number=5, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _SENSORDATA_STATUS,
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=14,
-  serialized_end=204,
-)
-
-
-_REPLY = _descriptor.Descriptor(
-  name='Reply',
-  full_name='Reply',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='returnValue', full_name='Reply.returnValue', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=206,
-  serialized_end=234,
-)
-
-
-_SENSORID = _descriptor.Descriptor(
-  name='SensorId',
-  full_name='SensorId',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='deviceId', full_name='SensorId.deviceId', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=236,
-  serialized_end=264,
-)
-
-
-_SENSORSTATUS = _descriptor.Descriptor(
-  name='SensorStatus',
-  full_name='SensorStatus',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='status_freq', full_name='SensorStatus.status_freq', index=0,
-      number=1, type=5, cpp_type=1, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=266,
-  serialized_end=301,
-)
-
-
-_SENSORHISTORY = _descriptor.Descriptor(
-  name='SensorHistory',
-  full_name='SensorHistory',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='statuses', full_name='SensorHistory.statuses', index=0,
-      number=1, type=5, cpp_type=1, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=303,
-  serialized_end=336,
-)
-
-_SENSORDATA.fields_by_name['status'].enum_type = _SENSORDATA_STATUS
-_SENSORDATA_STATUS.containing_type = _SENSORDATA
-DESCRIPTOR.message_types_by_name['SensorData'] = _SENSORDATA
-DESCRIPTOR.message_types_by_name['Reply'] = _REPLY
-DESCRIPTOR.message_types_by_name['SensorId'] = _SENSORID
-DESCRIPTOR.message_types_by_name['SensorStatus'] = _SENSORSTATUS
-DESCRIPTOR.message_types_by_name['SensorHistory'] = _SENSORHISTORY
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
+_SENSORDATA = DESCRIPTOR.message_types_by_name['SensorData']
+_REPLY = DESCRIPTOR.message_types_by_name['Reply']
+_SENSORID = DESCRIPTOR.message_types_by_name['SensorId']
+_SENSORSTATUS = DESCRIPTOR.message_types_by_name['SensorStatus']
+_SENSORHISTORY = DESCRIPTOR.message_types_by_name['SensorHistory']
+_FIELD = DESCRIPTOR.message_types_by_name['Field']
+_TOPSENSORID = DESCRIPTOR.message_types_by_name['TopSensorId']
+_SENSORDATA_STATUS = _SENSORDATA.enum_types_by_name['Status']
 SensorData = _reflection.GeneratedProtocolMessageType('SensorData', (_message.Message,), {
   'DESCRIPTOR' : _SENSORDATA,
   '__module__' : 'iot_pb2'
@@ -297,51 +61,40 @@ SensorHistory = _reflection.GeneratedProtocolMessageType('SensorHistory', (_mess
   })
 _sym_db.RegisterMessage(SensorHistory)
 
+Field = _reflection.GeneratedProtocolMessageType('Field', (_message.Message,), {
+  'DESCRIPTOR' : _FIELD,
+  '__module__' : 'iot_pb2'
+  # @@protoc_insertion_point(class_scope:Field)
+  })
+_sym_db.RegisterMessage(Field)
 
+TopSensorId = _reflection.GeneratedProtocolMessageType('TopSensorId', (_message.Message,), {
+  'DESCRIPTOR' : _TOPSENSORID,
+  '__module__' : 'iot_pb2'
+  # @@protoc_insertion_point(class_scope:TopSensorId)
+  })
+_sym_db.RegisterMessage(TopSensorId)
 
-_IOTSENDER = _descriptor.ServiceDescriptor(
-  name='IotSender',
-  full_name='IotSender',
-  file=DESCRIPTOR,
-  index=0,
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_start=339,
-  serialized_end=490,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='GetSensorData',
-    full_name='IotSender.GetSensorData',
-    index=0,
-    containing_service=None,
-    input_type=_SENSORDATA,
-    output_type=_REPLY,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='SendSensorStatus',
-    full_name='IotSender.SendSensorStatus',
-    index=1,
-    containing_service=None,
-    input_type=_SENSORID,
-    output_type=_SENSORSTATUS,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='SendSensorHistory',
-    full_name='IotSender.SendSensorHistory',
-    index=2,
-    containing_service=None,
-    input_type=_SENSORID,
-    output_type=_SENSORHISTORY,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-])
-_sym_db.RegisterServiceDescriptor(_IOTSENDER)
+_IOTSENDER = DESCRIPTOR.services_by_name['IotSender']
+if _descriptor._USE_C_DESCRIPTORS == False:
 
-DESCRIPTOR.services_by_name['IotSender'] = _IOTSENDER
-
+  DESCRIPTOR._options = None
+  _SENSORDATA._serialized_start=14
+  _SENSORDATA._serialized_end=204
+  _SENSORDATA_STATUS._serialized_start=140
+  _SENSORDATA_STATUS._serialized_end=204
+  _REPLY._serialized_start=206
+  _REPLY._serialized_end=234
+  _SENSORID._serialized_start=236
+  _SENSORID._serialized_end=264
+  _SENSORSTATUS._serialized_start=266
+  _SENSORSTATUS._serialized_end=301
+  _SENSORHISTORY._serialized_start=303
+  _SENSORHISTORY._serialized_end=336
+  _FIELD._serialized_start=338
+  _FIELD._serialized_end=360
+  _TOPSENSORID._serialized_start=362
+  _TOPSENSORID._serialized_end=403
+  _IOTSENDER._serialized_start=406
+  _IOTSENDER._serialized_end=600
 # @@protoc_insertion_point(module_scope)
