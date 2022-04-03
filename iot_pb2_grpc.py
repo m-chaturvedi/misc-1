@@ -29,6 +29,11 @@ class IotSenderStub(object):
                 request_serializer=iot__pb2.SensorId.SerializeToString,
                 response_deserializer=iot__pb2.SensorHistory.FromString,
                 )
+        self.SendTopSensorId = channel.unary_unary(
+                '/IotSender/SendTopSensorId',
+                request_serializer=iot__pb2.Field.SerializeToString,
+                response_deserializer=iot__pb2.TopSensorId.FromString,
+                )
 
 
 class IotSenderServicer(object):
@@ -53,6 +58,12 @@ class IotSenderServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def SendTopSensorId(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_IotSenderServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -70,6 +81,11 @@ def add_IotSenderServicer_to_server(servicer, server):
                     servicer.SendSensorHistory,
                     request_deserializer=iot__pb2.SensorId.FromString,
                     response_serializer=iot__pb2.SensorHistory.SerializeToString,
+            ),
+            'SendTopSensorId': grpc.unary_unary_rpc_method_handler(
+                    servicer.SendTopSensorId,
+                    request_deserializer=iot__pb2.Field.FromString,
+                    response_serializer=iot__pb2.TopSensorId.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -129,5 +145,22 @@ class IotSender(object):
         return grpc.experimental.unary_unary(request, target, '/IotSender/SendSensorHistory',
             iot__pb2.SensorId.SerializeToString,
             iot__pb2.SensorHistory.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SendTopSensorId(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/IotSender/SendTopSensorId',
+            iot__pb2.Field.SerializeToString,
+            iot__pb2.TopSensorId.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

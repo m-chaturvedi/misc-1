@@ -1,4 +1,5 @@
 grpcio>=1.43.0
+grpcio-tools
 pip>=22.0.3
 protobuf>=3.19.4
 pytest>=7.0.1
